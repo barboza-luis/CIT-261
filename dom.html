@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="DOM Manipulation Using createElement, appendChild, insertBefore, removeChild, etc.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+
+<title>CIT 261 - DOM Manipulation Using createElement, appendChild, insertBefore, removeChild, etc.</title>
+
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body>
+<main>
+
+<table style="width: 650px">
+    <tr>
+        <td rowspan="2"><input id="texto" name="texto" type="text" value="Info to be used." style="width: 300px; padding: 5px; cursor: text;" /></td>
+        <td><button onclick="add_p(false);" style="width: 110px;" title="Insert the information from the text box before the original paragraph, in this example before all paragraphs">Insert Before</button></td>
+        <td rowspan="2"><select name="select0" id="select0"style="padding: 5px;" title="Select paragraph" disabled>
+            <option id="u0" value="">None</option>
+        </select></td>
+        <td><button id="btnChild" onclick="chidren_p();" style="width: 110px;" title="Delete the selected paragraph in the combo box" disabled>Remove Child</button></td>
+    </tr>
+    <tr>
+        <td><button onclick="add_p(true);" style="width: 110px;" title="Add the information in the text box after the original paragraph, in this example after all the paragraphs">Append Child</button></td>
+        <td><button id="btnRpl" onclick="replace_p();" style="width: 110px;" disabled>Replace Child</button></td>
+    </tr>
+    <tr>
+        <td colspan="4"><p id="p0">This is the original paragraph. This is the original paragraph, this is the original paragraph. This is the original paragraph, This is the original paragraph; This is the original paragraph.</p></td>
+    </tr>
+</table>
+
+</main>
+
+<script>
+
+var z = 0;
+
+function changeSel(num){
+    document.getElementById('o' + num).remove();
+    document.getElementById('p' + num).remove();
+    if(document.getElementById('p0').children.length==0){
+        z = 0;
+        document.getElementById('u0').innerHTML = "None";
+        document.getElementById('btnChild').disabled = true;
+        document.getElementById('select0').disabled = true;
+        document.getElementById('btnRpl').disabled = true;
+    }
+}
+
+function chidren_p(){
+    var sel = document.getElementById("select0").value;
+    changeSel(sel);
+}
+
+function replace_p(){
+    var p = document.createElement('p');
+    var sel = document.getElementById("select0").value;
+    var texto = document.createTextNode('p' + sel + ': ' + document.getElementById('texto').value);
+    p.appendChild(texto);
+    z++;
+    p.id = 'p' + z;
+    p.innerHTML = p.innerHTML + " <a href=\"javascript:remove_p('" + z + "');\">Remove</a>";
+    document.getElementById('p0').replaceChild(p, document.getElementById("p" + sel));
+
+    var select = document.getElementById("select0");
+    document.getElementById('u0').selected = true;
+    var aTag = document.createElement('option');
+    aTag.setAttribute('value',z);
+    aTag.innerHTML = 'p' + sel;
+    aTag.id = 'o' + z;
+    select.appendChild(aTag);
+    document.getElementById('o' + sel).remove();
+}
+
+function remove_p(id){
+    changeSel(id);
+}
+
+function add_p(tipo){
+    var p = document.createElement('p');
+    if(document.getElementById('p0').children.length==0){
+        document.getElementById('u0').innerHTML = "No Selection";
+        document.getElementById('btnChild').disabled = false;
+        document.getElementById('select0').disabled = false;
+        document.getElementById('btnRpl').disabled = false;
+    }
+    z++;
+    p.id = 'p' + z;
+    var texto = document.createTextNode('p' + z + ': ' + document.getElementById('texto').value);
+    p.appendChild(texto);
+    p.innerHTML = p.innerHTML + " <a href=\"javascript:remove_p('" + z + "');\">Remove</a>";
+    if(tipo){
+        document.getElementById('p0').appendChild(p);    
+    } else {
+        var pE = document.getElementById('p0')
+        pE.insertBefore(p, pE.childNodes[0]);
+    }
+
+    var select = document.getElementById("select0");
+    var aTag = document.createElement('option');
+    aTag.setAttribute('value',z);
+    aTag.innerHTML = 'p' + z;
+    aTag.id = 'o' + z;
+    select.appendChild(aTag);
+}
+
+</script>
+
+</body>
+</html>
