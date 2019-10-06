@@ -41,9 +41,14 @@
 
 var z = 0;
 
+
+//Remove the elements p and option, if 0 just disabled them
 function changeSel(num){
+    /* remove */
     document.getElementById('o' + num).remove();
-    document.getElementById('p' + num).remove();
+    /* removeChild */
+    document.getElementById('p0').removeChild(document.getElementById('p' + num));
+    
     if(document.getElementById('p0').children.length==0){
         z = 0;
         document.getElementById('u0').innerHTML = "None";
@@ -53,6 +58,7 @@ function changeSel(num){
     }
 }
 
+//Get the current select option if empty send and alert else go to changeSel
 function chidren_p(){
     var sel = document.getElementById("select0").value;
     if(sel==""){
@@ -62,7 +68,9 @@ function chidren_p(){
     changeSel(sel);
 }
 
+//replaceChild, create a p element and replace and existing one 
 function replace_p(){
+    /* createElement */
     var p = document.createElement('p');
     var sel = document.getElementById("select0").value;
     if(sel==""){
@@ -70,27 +78,35 @@ function replace_p(){
         return;
     }
     var texto = document.createTextNode('p' + sel + ': ' + document.getElementById('texto').value);
+    /* appendChild */
     p.appendChild(texto);
     z++;
     p.id = 'p' + z;
     p.innerHTML = p.innerHTML + " <a href=\"javascript:remove_p('" + z + "');\">Remove</a>";
+    /* replaceChild */
     document.getElementById('p0').replaceChild(p, document.getElementById("p" + sel));
 
     var select = document.getElementById("select0");
     document.getElementById('u0').selected = true;
+    /* createElement */
     var aTag = document.createElement('option');
     aTag.setAttribute('value',z);
     aTag.innerHTML = 'p' + sel;
     aTag.id = 'o' + z;
+    /* appendChild */
     select.appendChild(aTag);
+    /* remove */
     document.getElementById('o' + sel).remove();
 }
 
+//Just to have a more representative name
 function remove_p(id){
     changeSel(id);
 }
 
+//Add a new p element to the node p0
 function add_p(tipo){
+    /* createElement */
     var p = document.createElement('p');
     if(document.getElementById('p0').children.length==0){
         document.getElementById('u0').innerHTML = "No Selection";
@@ -101,20 +117,25 @@ function add_p(tipo){
     z++;
     p.id = 'p' + z;
     var texto = document.createTextNode('p' + z + ': ' + document.getElementById('texto').value);
+    /* appendChild */
     p.appendChild(texto);
     p.innerHTML = p.innerHTML + " <a href=\"javascript:remove_p('" + z + "');\">Remove</a>";
     if(tipo){
+        /* appendChild */
         document.getElementById('p0').appendChild(p);    
     } else {
         var pE = document.getElementById('p0')
+        /* insertBefore */
         pE.insertBefore(p, pE.childNodes[0]);
     }
 
     var select = document.getElementById("select0");
+    /* createElement */
     var aTag = document.createElement('option');
     aTag.setAttribute('value',z);
     aTag.innerHTML = 'p' + z;
     aTag.id = 'o' + z;
+    /* appendChild */
     select.appendChild(aTag);
 }
 
