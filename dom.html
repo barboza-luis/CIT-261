@@ -55,12 +55,20 @@ function changeSel(num){
 
 function chidren_p(){
     var sel = document.getElementById("select0").value;
+    if(sel==""){
+        alert("Please, select one option");
+        return;
+    }
     changeSel(sel);
 }
 
 function replace_p(){
     var p = document.createElement('p');
     var sel = document.getElementById("select0").value;
+    if(sel==""){
+        alert("Please, select one option");
+        return;
+    }
     var texto = document.createTextNode('p' + sel + ': ' + document.getElementById('texto').value);
     p.appendChild(texto);
     z++;
