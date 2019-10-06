@@ -19,6 +19,15 @@
 
 <table style="width: 650px">
     <tr>
+        <td colspan="4">
+            <h2>CIT-261 / Luis Barboza</h2>
+            <h4>DOM Manipulation Using createElement, appendChild, insertBefore, removeChild, etc.</h4>
+            I highlighted 8 functions (createElement, appendChild, insertBefore, removeChild, remove, getElementById, createTextNode and setAttribute).<br><br>
+            If you place your mouse over the buttons will give you a brief explanation about that function.<br><br>
+            If you see the source code you will have some comments of the functions.<br><br><br><br><hr><br><br>
+        </td>
+    </tr>
+    <tr>
         <td rowspan="2"><input id="texto" name="texto" type="text" value="Info to be used." style="width: 300px; padding: 5px; cursor: text;" /></td>
         <td><button onclick="add_p(false);" style="width: 110px;" title="Insert the information from the text box before the original paragraph, in this example before all paragraphs">Insert Before</button></td>
         <td rowspan="2"><select name="select0" id="select0"style="padding: 5px;" title="Select paragraph" disabled>
@@ -28,7 +37,7 @@
     </tr>
     <tr>
         <td><button onclick="add_p(true);" style="width: 110px;" title="Add the information in the text box after the original paragraph, in this example after all the paragraphs">Append Child</button></td>
-        <td><button id="btnRpl" onclick="replace_p();" style="width: 110px;" disabled>Replace Child</button></td>
+        <td><button id="btnRpl" onclick="replace_p();" style="width: 110px;"  title="Replace the selected paragraph in the combo box using the information in the text box" disabled>Replace Child</button></td>
     </tr>
     <tr>
         <td colspan="4"><p id="p0">This is the original paragraph. This is the original paragraph, this is the original paragraph. This is the original paragraph, This is the original paragraph; This is the original paragraph.</p></td>
