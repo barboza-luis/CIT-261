@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="JavaScript - Loops, Conditional Statements, Functions, Variables, Parameters, Arrays, Associative Arrays">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+
+<title>CIT 261 - JavaScript - Loops, Conditional Statements, Functions, Variables, Parameters, Arrays, Associative Arrays</title>
+
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body style="font-size:14px;">
+<main>
+
+<table style="width: 650px">
+    <tr>
+        <td>
+            <h2>CIT-261 / Luis Barboza</h2>
+            <h4>JavaScript - Loops, Conditional Statements, Functions, Variables, Parameters, Arrays, Associative Arrays.</h4>
+            <p>In this example I have tried to use all the concepts by exemplifying each of them, I put comments in the source code so you can easily find them in the example.</p>
+            <p>Concepts handled in the example:</p>
+            <ul>
+                <li><b>Loops</b> can execute a block of code a number of times or as long as a specified condition is true.</li>
+                <li><b>Conditional statements</b> are used to perform different actions based on different conditions.</li>
+                <li><b>Variables</b> are containers for storing data values. Variables declared within a function, become LOCAL to the function. Local variables can only be accessed from within the function.</li>
+                <li><b>Function</b> is a block of code designed to perform a particular task. It is executed when "something" invokes it (calls it). Functions often compute a return value. The return value is "returned" back to the "caller".</li>
+                <li>Function <b>parameters</b> are the names listed in the function definition.</li>
+                <li>Function <b>arguments</b> are the real values passed to (and received by) the function.</li>
+                <li><b>Arrays</b> are used to store multiple values in a single variable.</li>
+                <li><b>Associative Arrays</b> are an array that uses names instead of numbers as the index. In Javascript Associative Arrays can be handle it as objects</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select id="loopType" style="padding: 5px;" onchange="updateSelect();">
+                <option value="">Select a type of loop</option>
+                <option value="1">For</option>
+                <option value="2">For In</option>
+                <option value="3">For Of</option>
+                <option value="4">While</option>
+                <option value="5">Do...While</option>
+            </select>
+            <select id="loopIterations" style="padding: 5px;">
+                <option value="">Select number of loops</option>
+                <option value="0">0 iterations (none)</option>
+                <option value="1">1 iteration</option>
+                <option value="2">2 iterations</option>
+                <option value="3">3 iterations</option>
+                <option value="4">4 iterations</option>
+                <option value="5">5 iterations</option>
+                <option value="6">6 iterations</option>
+                <option value="7">7 iterations</option>
+                <option value="8">8 iterations</option>
+                <option value="9">9 iterations (all)</option>
+            </select>
+            <button style="padding: 5px;" onclick="manager();">Execute</button>
+        </td>
+    </tr>
+    <tr>
+        <td><textarea id="texto" style="width:620px; height:200px; padding:5px;"></textarea></td>
+    </tr>
+</table>
+
+</main>
+
+<script>
+
+//var help us to declare variables, n and tope are global variables,
+//it means that the scope is global you can use it anywhere.  
+var n = 0;
+var tope = 9;
+
+
+//Array
+var bookLabels = ['issn','title','month','year','publishedBy','numberOfPages','language','author','edition'];
+//Other way to declare an Array
+//var labelsBooks = new Array('issn','title','month','year','publishedBy','numberOfPages','language','author','edition');
+
+//Associative Array (Objects)
+var book = {
+    'issn' : '1789138086',
+    'title' : 'Full Stack Development with Spring Boot 2.0 and React',
+    'month' : 6,
+    'year' : 2018,
+    'publishedBy' : 'Packt Publishing',
+    'numberOfPages' : 302,
+    'language' : 'English',
+    'author' : 'Juha Hinkula',
+    'edition' : 1
+}
+/* Other way to declare an Associative Array
+var Content = new Object();
+Content.issn = '1789138086';
+Content.title = 'Full Stack Development with Spring Boot 2.0 and React';
+Content.month = 6;
+Content.year = 2018;
+Content.publishedBy = 'Packt Publishing';
+Content.numberOfPages = 302;
+Content.language = 'English';
+Content.author = 'Juha Hinkula';
+Content.edition = 1;
+*/
+
+//This function is to shorten the amount of code (chars)
+//This function has 1 parameter (id)
+function gObj(id){
+    return document.getElementById(id);
+}
+
+//Update the loop number acording to the loop type
+//This function has no parameters
+function updateSelect(){
+    //Declaring a local variable
+    var type = gObj('loopType');
+    var iterations = gObj('loopIterations');
+    //Condition Statement IF..ELSE
+    if((type.value=='2')||(type.value=='3')){
+        iterations.value = tope;
+        iterations.disabled = true;
+    } else {
+        iterations.selectedIndex = 0;
+        iterations.disabled = false;
+    }
+}
+
+//Manage the type of loop acording the selection
+function manager(){
+    var type = gObj('loopType');
+    var iterations = gObj('loopIterations');
+    //Condition Statement IF..ELSE IF..ELSE
+    if(type.value==''){
+        alert('Select a loop type please');
+    } else if(iterations.value==''){
+        alert('Select number of loops please');
+    } else {
+        //Condition statement SWITCH
+        switch(type.value){
+            //Calling a function with 1 argument (iterations.value)
+            case "1": forStmt(iterations.value); break; //For
+            //calling a function without arguments
+            case "2": forInStmt(); break; //For In
+            case "3": forOfStmt(); break; //For Of
+            case "4": whileStmt(iterations.value); break; //While
+            case "5": doWhileStmt(iterations.value); break; //Do...While
+            /*
+            //default:
+                The default keyword specifies the code to run if there is no case match.
+                In this example, It will never happen because the element is a SELECT and
+                I already programed all the options, it is only for demonstration purposes.
+                //break;
+            */
+        }
+    }
+}
+
+//FOR LOOP function example
+//loops through a block of code a number of times
+//for(initial value; condition; change factor){ Code }
+function forStmt(limit){
+    var txt = "FOR LOOP\ninit: 1; Number of Iterations: " + limit + "\n";
+    for(var i=0; i<limit; i++){
+        /*
+            The eval() function evaluates or executes an argument.
+            If the argument is an expression, eval() evaluates the
+            expression. If the argument is one or more JavaScript
+            statements, eval() executes the statements.
+        */
+        eval('var bookItem = book.' + bookLabels[i] + ';');
+        txt+= "iteration " + (i+1) + " => " + bookLabels[i] + ": " + bookItem + "\n";
+    }
+    //Condition Statment Shorter IF Statement
+    gObj('texto').value = txt + ((limit==0)? "FOR loop was never executed\n" : 'End of loop');
+}
+
+//FOR IN LOOP function example
+//loops through the properties of an object
+//for(properties in object){ Code }
+function forInStmt(){
+    var txt = "FOR IN LOOP\ninit: 1st position of the Object\nNumber of Iterations: Run through all object property\n";
+    var n;
+    var i=0;
+    for(n in book){//book is an object
+        txt+= "iteration " + (++i) + " => " + n + ": " + book[n] + "\n";
+    }
+    gObj('texto').value = txt + "End of loop";
+}
+
+//FOR OF LOOP function example
+//loops through the values of an iterable object
+//for(values of iterableObject){ Code } Iterable Object could be an array or string 
+function forOfStmt(){
+    var txt = "FOR OF LOOP\ninit: 1st position of the array\nNumber of Iterations: Run through all array positions\n";
+    var label;
+    var i=1;
+    for(label of bookLabels){//bookLabels is an array. Also it could be an array
+        eval('var bookItem = book.' + label + ';');
+        txt+= "iteration " + (i++) + " => " + label + ": " + bookItem + "\n";
+    }
+    gObj('texto').value = txt + "End of loop";
+}
+
+//WHILE LOOP function example
+//loops through a block of code while a specified condition is true
+//while(Condition){ Code }
+function whileStmt(limit){
+    var txt = "WHILE LOOP\ninit: 1; Number of Iterations: " + limit + "\n";
+    var i = 0;
+    while(i<limit){
+        eval('var bookItem = book.' + bookLabels[i] + ';');
+        i+=1;
+        txt+= "iteration " + i + " => " + bookLabels[i] + ": " + bookItem + "\n";
+    }
+    gObj('texto').value = txt + ((limit==0)? "WHILE loop was never executed\n" : 'End of loop');
+}
+
+//DO..WHILE LOOP function example
+//loops through a block of code while a specified condition is true, always runs at least once.
+function doWhileStmt(limit){
+    var txt = "DO...WHILE LOOP\ninit: 1; Number of Iterations: " + limit + "\n";
+    var i = 0;
+    do{
+        i = i + 1;
+        eval('var bookItem = book.' + bookLabels[i] + ';');
+        txt+= "iteration " + i + " => " + bookLabels[i] + ": " + bookItem + "\n";      
+    } while(i<limit);
+    gObj('texto').value = txt + ((limit==0)? "DO...WHILE loop always runs at least once\n" : 'End of loop');
+}
+
+</script>
+
+</body>
+</html>
