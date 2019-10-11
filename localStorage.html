@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="Local Storage API, Storing and Retrieving Simple Data, Arrays, Associative Arrays, and Objects.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - Local Storage API, Storing and Retrieving Simple Data, Arrays, Associative Arrays, and Objects.</title>
+        
+<meta name="theme-color" content="#ffffff">
+
+<style>
+
+h1 { width:150px; text-align:right;}
+button { width:100px; padding:5px; }
+
+</style>
+
+</head>
+<body style="font-size:14px;">
+
+<table style="width: 650px">
+    <tr>
+        <td colspan="3">
+            <h2><a href="index.html">&lt;&lt;</a> Local Storage API, Storing and Retrieving Simple Data, Arrays, Associative Arrays, and Objects.</h2>
+            <p>With web storage, web applications can store data locally within the 
+                user's browser.Before HTML5, application data had to be stored in cookies, included in 
+                every server request. Web storage is more secure, and large amounts of 
+                data can be stored locally, without affecting website performance.</p>
+            <p>Unlike cookies, the storage limit is far larger (at least 5MB) and 
+                information is never transferred to the server.</p>
+            <p>Web storage is per origin (per domain and protocol). 
+                All pages, from one origin, can store and access the same data.</p>
+            <p>HTML web storage provides two objects for storing data on the client:<br>
+                <ul>
+                    <li>window.localStorage - stores data with no expiration date.</li>
+                    <li>window.sessionStorage - stores data for one session (data is lost when the browser tab is closed).</li>
+                </ul></p>
+            <p>With the accumulator, I use an Array to save the number of clicks, 
+                also date and time of the last click. Since only Strings can be 
+                stored in this tool, I used JSON.stringify and JSON.parse to 
+                convert to String and then convert to Array respectively. If we 
+                need Associative Arrays or Objects we would follow the same 
+                process as with the Array</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3"><hr></td>
+    </tr>
+    <tr>
+        <td style="width:105px;"><button onclick="clickCounter();">Counter</button></td>
+        <td><h1 id="counterLabel">0</h1></td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="width:105px;"><button onclick="clickAcum();">Acumulator</button></td>
+        <td><h1 id="acumLabel">0</h1></td>
+        <td id="dateMod"></td>
+    </tr>
+</table>
+
+<p>Click the button to see the increment in the labels.</p>
+<p>Close the browser tab (or window), and try again, the counter will be reset, and acumulator will store the data.</p>
+
+<script>
+
+var acumData = new Array();
+
+function gObj(id){
+    return document.getElementById(id)
+}
+
+function dayOfTheWeek(dia){
+    switch(dia){
+        case 0: return "Sun"; break;
+        case 1: return "Mon"; break;
+        case 2: return "Tue"; break;
+        case 3: return "Wed"; break;
+        case 4: return "Thu"; break;
+        case 5: return "Fri"; break;
+        case 6: return "Sat"; break;
+    }
+}
+
+function monthOfTheYear(mes){
+    switch(mes){
+        case 0: return "Jan"; break;
+        case 1: return "Feb"; break;
+        case 2: return "Mar"; break;
+        case 3: return "Apr"; break;
+        case 4: return "May"; break;
+        case 5: return "Jun"; break;
+        case 6: return "Jul"; break;
+        case 7: return "Ago"; break;
+        case 8: return "Sep"; break;
+        case 9: return "Oct"; break;
+        case 10: return "Nov"; break;
+        case 11: return "Dec"; break;
+    }
+}
+
+function formatDate(dt){
+    return dayOfTheWeek(dt.getDay()) + " " + monthOfTheYear(dt.getMonth()) + " " + dt.getDate() + " " + dt.getFullYear() + " " + dt.getHours() + ":" + format2Pos(dt.getMinutes()) + ":" + format2Pos(dt.getSeconds()); 
+}
+
+function format2Pos(vl){
+    var tmp = Number(vl);
+    return ((tmp<10)? ('0' + tmp) : tmp);
+}
+
+function clickCounter(){    
+    if(sessionStorage.clickCount){
+        sessionStorage.clickCount = Number(sessionStorage.clickCount) + 1;
+    } else {
+        sessionStorage.clickCount = 1;
+    }
+    gObj("counterLabel").innerHTML = sessionStorage.clickCount;
+}
+
+function clickAcum(){
+    if(localStorage.clickAcum){
+        acumData = JSON.parse(localStorage.clickAcum);
+        acumData[0] = Number(acumData[0]) + 1;
+    } else {
+        acumData[0] = 1;
+    }
+    acumData[1] = Date.now();
+    gObj("acumLabel").innerHTML = acumData[0];
+    gObj("dateMod").innerHTML = formatDate(new Date(acumData[1]));
+    localStorage.clickAcum = JSON.stringify(acumData);
+}
+
+if(typeof(sessionStorage.clickCount)==="undefined"){
+    sessionStorage.clickCount = 0;
+}
+if(typeof(localStorage.clickAcum)==="undefined"){
+    acumData[0] = 0;
+    acumData[1] = Date.now();
+    localStorage.clickAcum = JSON.stringify(acumData);
+} else {
+    acumData = JSON.parse(localStorage.clickAcum);
+}
+gObj("counterLabel").innerHTML = sessionStorage.clickCount;
+gObj("acumLabel").innerHTML = acumData[0];
+gObj("dateMod").innerHTML = formatDate(new Date(acumData[1]));
+
+</script>
+
+</body>
+</html>
