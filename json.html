@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="JSON Parse, Stringify.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - JSON Parse, Stringify.</title>
+        
+<meta name="theme-color" content="#ffffff">
+
+<style>
+
+</style>
+
+</head>
+<body style="font-size:14px;">
+
+<table style="width: 650px">
+    <tr>
+        <td>
+            <h2><a href="index.html">&lt;&lt;</a> JSON Parse, Stringify.</h2>
+            <p>JSON: JavaScript Object Notation. It is text, written with JavaScript object notation for storing and exchanging data.</p>
+            <p>JSON is Like XML Because it is "self describing" (human readable), is hierarchical (values within values), it can be parsed and used by lots of programming languages and it can be fetched with an XMLHttpRequest.</p>
+            <p>JSON is Unlike XML Because it doesn't use end tag, it is shorter, it is quicker to read and write and it can use arrays.</p>
+            <p>XML is much more difficult to parse than JSON. JSON is parsed into a ready-to-use JavaScript object.</p>
+            <hr>
+            <p>In this example I save Data in localStorage using JSON Stringify and retrieve Data from localStorage using JSON Parse.</p>
+        </td>
+    </tr>
+</table>
+<form onsubmit="return false;">
+<table style="width: 650px">
+    <tr>
+        <td><label for="issn">ISSN</label></td>
+        <td><input type="text" name="issn" id="issn" size="10"></td>
+    </tr>
+    <tr>
+        <td><label for="title">Title</label></td>
+        <td><input type="text" name="title" id="title" size="50"></td>
+    </tr>
+    <tr>
+        <td><label for="month">Month</label></td>
+        <td><select id="month" name="month">
+            <option value="">Select Month</option>
+            <option value="1">Jan</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">May</option>
+            <option value="6">Jun</option>
+            <option value="7">Jul</option>
+            <option value="8">Aug</option>
+            <option value="9">Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td><label for="year">Year</label></td>
+        <td><input type="number" name="year" id="year" size="4"></td>
+    </tr>
+    <tr>
+        <td><label for="publishedBy">Published By</label></td>
+        <td><input type="text" name="publishedBy" id="publishedBy" size="50"></td>
+    </tr>
+    <tr>
+        <td><label for="numberOfPages">Number Of Pages</label></td>
+        <td><input type="number" name="numberOfPages" id="numberOfPages" size="6"></td>
+    </tr>
+    <tr>
+        <td><label for="language">Language</label></td>
+        <td>
+            <radiogroup>
+                <input type="radio" id="English" name="language" value="English" checked><label for="English">&nbsp;English</label>
+                <input type="radio" id="Spanish" name="language" value="Spanish"><label for="Spanish">&nbsp;Spanish</label>
+                <input type="radio" id="German" name="language" value="German"><label for="German">&nbsp;German</label>
+                <input type="radio" id="Italian" name="language" value="Italian"><label for="Italian">&nbsp;Italian</label>
+                <input type="radio" id="French" name="language" value="French"><label for="French">&nbsp;French</label>
+            </radiogroup>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="author">Author</label></td>
+        <td><input type="text" name="author" id="author" size="50"></td>
+    </tr>
+    <tr>
+        <td><label for="edition">Edition</label></td>
+        <td><input type="number" name="edition" id="edition" size="3"></td>
+    </tr>
+    <tr>
+        <td><label for="borrowed">Borrowed</label></td>
+        <td><input type="checkbox" name="borrowed" id="borrowed"></td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top;"><label for="lastCustomers">Last Customers</label><br><small>(One customer id per line)</small></td>
+        <td><textarea name="lastCustomers" id="lastCustomers" rows="6" cols="25"></textarea></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:right;">
+            <input type="reset" value="Clear">&nbsp;
+            <button onclick="setInfo(oBook);">Set Original</button>&nbsp;
+            <button onclick="setStoreIt();">Set Store it</button>&nbsp;
+            <button onclick="saveInfo();">Save</button>
+        </td>
+    </tr>
+</table>
+</form>
+
+<script>
+
+var oBook = {
+    issn : '1789138086',
+    title : 'Full Stack Development with Spring Boot 2.0 and React',
+    month : 6,
+    year : 2018,
+    publishedBy : 'Packt Publishing',
+    numberOfPages : 302,
+    language : 'English',
+    author : 'Juha Hinkula',
+    edition : 1,
+    borrowed : false,
+    lastCustomers : ['A78945623', 'T89456578', 'E12035645', 'A15903576', 'T26483791']
+};
+var cBook = {
+    issn : '',
+    title : '',
+    month : 0,
+    year : 0,
+    publishedBy : '',
+    numberOfPages : 0,
+    language : 'English',
+    author : '',
+    edition : 0,
+    borrowed : false,
+    lastCustomers : []
+};
+
+function gObj(id){
+    return document.getElementById(id)
+}
+
+function fillForm(oBook){
+    gObj('issn').value = oBook.issn;
+    gObj('title').value = oBook.title;
+    gObj('month').value = oBook.month;
+    gObj('year').value = oBook.year;
+    gObj('publishedBy').value = oBook.publishedBy;
+    gObj('numberOfPages').value = oBook.numberOfPages;
+    gObj(oBook.language).checked = true;
+    gObj('author').value = oBook.author;
+    gObj('edition').value = oBook.edition;
+    gObj('borrowed').checked = oBook.borrowed;
+    gObj('lastCustomers').value = oBook.lastCustomers.join("\n");   
+}
+
+function getForm(){
+    cBook.issn = gObj('issn').value;
+    cBook.title = gObj('title').value;
+    cBook.month = gObj('month').value;
+    cBook.year = gObj('year').value;
+    cBook.publishedBy = gObj('publishedBy').value;
+    cBook.numberOfPages = gObj('numberOfPages').value;
+    cBook.language = ((gObj('English').checked) ? 'English' : ((gObj('Spanish').checked) ? 'Spanish' : ((gObj('German').checked) ? 'German' : ((gObj('Italian').checked) ? 'Italian' : 'French'))));
+    cBook.author = gObj('author').value;
+    cBook.edition = gObj('edition').value;
+    cBook.borrowed = gObj('borrowed').checked;
+    cBook.lastCustomers = gObj('lastCustomers').value.split("\n");
+}
+
+function setInfo(vBook, saveIt){
+    fillForm(vBook);
+    if(saveIt){
+        localStorage.book = JSON.stringify(vBook);
+    }
+}
+
+function saveInfo(){
+    getForm();
+    localStorage.book = JSON.stringify(cBook);
+}
+
+function setStoreIt(){
+    setInfo(JSON.parse(localStorage.book),false);
+}
+
+if(typeof(localStorage.book)==="undefined"){
+    setInfo(oBook);
+} else{
+    setInfo(JSON.parse(localStorage.book),false);
+}
+
+</script>
+
+</body>
+</html>
