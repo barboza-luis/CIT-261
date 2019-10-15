@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="HTML5 Tags - Video, Audio, and Canvas.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - HTML5 Tags - Video, Audio, and Canvas.</title>
+        
+<meta name="theme-color" content="#ffffff">
+
+<style>
+
+</style>
+
+</head>
+<body style="font-size:14px;">
+
+<div style="display:none;">
+    <img id="source" src="image.png" style="width:50px; height:50px;">
+</div>
+
+<table style="width: 650px">
+<tr>
+    <td colspan="2">
+        <h2><a href="index.html">&lt;&lt;</a> HTML5 Tags - Video, Audio, and Canvas.</h2>
+        <p>Before HTML5, a video, audio or drawing could only be displayed in a browser through a format, an extension or plug-in. It was then standardized and included across major browsers in the introduction of HTML5.</p>
+        <p><b>&lt;video&gt;</b> element specifies a standard way to embed a video in a web page.</p>
+        <p><b>&lt;audio&gt;</b> element specifies a standard way to embed audio in a web page.</p>
+        <p><b>&lt;canvas&gt;</b> element is used to draw graphics, on the fly, via scripting (usually JavaScript). This element is only a container for graphics, Similar to a blank canvas that a painter works off. Canvas has several methods for drawing paths, boxes, circles, text, and adding images.</p>
+    </td>
+</tr>
+<tr>
+    <td style="vertical-align: top;">
+        <h3>Video</h3>
+        <video id="videObj" style="width:256px; height:128px;" onplay="gObj('audiObj').pause();" controls>
+            <source src="bookOfMormonTeaser.mp4" type="video/mp4">
+            <source src="bookOfMormonTeaser.ogg" type="video/ogg">
+            Your browser doesn't support the video tag (HTML5).
+        </video>
+    </td>
+    <td style="vertical-align: top;">
+        <h3>Audio</h3>
+        <audio id="audiObj" onplay="gObj('videObj').pause();" controls>
+            <source src="loveOneAnother.mp3" type="audio/mpeg">
+            <source src="loveOneAnother.ogg" type="audio/ogg">
+            Your browser doesn't support the audio tag (HTML5).
+        </audio>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        <br><h3>Canvas</h3>
+        <canvas id="myCanvas" style="width:300px; height:150px; border:1px solid #d3d3d3;">
+            Your browser doesn't support the canvas tag (HTML5).
+        </canvas>
+    </td>
+</tr>
+</table>
+
+<script>
+
+function gObj(id){
+    return document.getElementById(id);
+}
+
+window.onload = function() {
+    var canvas = gObj('myCanvas');
+    var ctx = canvas.getContext("2d");
+    //Image
+    var img = document.getElementById("source");
+    ctx.drawImage(img, 10, 10);
+    //Gradient
+    var grd = ctx.createLinearGradient(0,0,200,0);
+    grd.addColorStop(0,"red");
+    grd.addColorStop(1,"yellow");
+    ctx.fillStyle = grd;
+    ctx.fillRect(10,70,150,70);
+    //circle
+    var centerX = (canvas.width / 2) + 80;
+    var centerY = canvas.height / 2;
+    var radius = 65;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'green';
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#003300';
+    ctx.stroke();
+    //Text
+    ctx.fillStyle = 'blue';
+    ctx.font = "24px Arial";
+    ctx.fillText("CIT 261",75,45);
+};
+
+</script>
+
+</body>
+</html>
