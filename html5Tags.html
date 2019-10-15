@@ -38,6 +38,7 @@
     <td style="vertical-align: top;">
         <h3>Video</h3>
         <video id="videObj" style="width:256px; height:128px;" onplay="gObj('audiObj').pause();" controls>
+            <!–– In case formats would not be accepted or supported ––>
             <source src="bookOfMormonTeaser.mp4" type="video/mp4">
             <source src="bookOfMormonTeaser.ogg" type="video/ogg">
             Your browser doesn't support the video tag (HTML5).
@@ -46,6 +47,7 @@
     <td style="vertical-align: top;">
         <h3>Audio</h3>
         <audio id="audiObj" onplay="gObj('videObj').pause();" controls>
+            <!–– In case formats would not be accepted or supported ––>
             <source src="loveOneAnother.mp3" type="audio/mpeg">
             <source src="loveOneAnother.ogg" type="audio/ogg">
             Your browser doesn't support the audio tag (HTML5).
@@ -56,6 +58,7 @@
     <td colspan="2">
         <br><h3>Canvas</h3>
         <canvas id="myCanvas" style="width:300px; height:150px; border:1px solid #d3d3d3;">
+            <!–– In case would not be supported ––>
             Your browser doesn't support the canvas tag (HTML5).
         </canvas>
     </td>
