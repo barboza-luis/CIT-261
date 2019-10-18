@@ -4,12 +4,12 @@
 <head>
 
 <meta charset="utf-8">
-<meta name="description" content="JSON Parse, Stringify.">
+<meta name="description" content="Javascrip Objects - Object Creation Functions, Inheritance, Properties, Methods, Instantiation.">
 <meta name="author" content="Luis Barboza">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#ffffff">
         
-<title>CIT 261 - JSON Parse, Stringify.</title>
+<title>CIT 261 - Javascrip Objects - Object Creation Functions, Inheritance, Properties, Methods, Instantiation.</title>
         
 <meta name="theme-color" content="#ffffff">
 
@@ -23,17 +23,14 @@
 <table style="width: 650px">
     <tr>
         <td>
-            <h2><a href="index.html">&lt;&lt;</a> JSON Parse, Stringify.</h2>
-            <p>JSON: JavaScript Object Notation. It is text, written with JavaScript object notation for storing and exchanging data.</p>
-            <p>JSON is Like XML Because it is "self describing" (human readable), is hierarchical (values within values), it can be parsed and used by lots of programming languages and it can be fetched with an XMLHttpRequest.</p>
-            <p>JSON is Unlike XML Because it doesn't use end tag, it is shorter, it is quicker to read and write and it can use arrays.</p>
-            <p>XML is much more difficult to parse than JSON. JSON is parsed into a ready-to-use JavaScript object.</p>
+            <h2><a href="index.html">&lt;&lt;</a> Javascrip Objects - Object Creation Functions, Inheritance, Properties, Methods, Instantiation.</h2>
+            <p></p>
             <hr>
-            <p>In this example I save Data in localStorage using JSON Stringify and retrieve Data from localStorage using JSON Parse.</p>
+            <p>In this example I save Data in localStorage using objects.</p>
         </td>
     </tr>
 </table>
-<form onsubmit="return false;">
+<form id="oForm" onsubmit="return false;">
 <table style="width: 650px">
     <tr>
         <td><label for="issn">ISSN</label></td>
@@ -101,45 +98,81 @@
         <td style="vertical-align: top;"><label for="lastCustomers">Last Customers</label><br><small>(One customer id per line)</small></td>
         <td><textarea name="lastCustomers" id="lastCustomers" rows="6" cols="25"></textarea></td>
     </tr>
-    <tr>
-        <td colspan="2" style="text-align:right;">
-            <input type="reset" value="Clear">&nbsp;
-            <button onclick="setInfo(oBook);">Set Original</button>&nbsp;
-            <button onclick="setStoreIt();">Set Store it</button>&nbsp;
-            <button onclick="saveInfo();">Save</button>
-        </td>
-    </tr>
 </table>
 </form>
+<button onclick="gObj('oForm').reset();">Reset</button>
+<button onclick="location.reload();">Reload</button>&nbsp;
+<button onclick="setOriginal();">Set Original</button>&nbsp;
+<button onclick="setStoreIt();">Set Store it</button>&nbsp;
+<button onclick="saveInfo();">Save</button>
+<button onclick="showString();">To String</button>
 
 <script>
 
-var oBook = {
-    issn : '1789138086',
-    title : 'Full Stack Development with Spring Boot 2.0 and React',
-    month : 6,
-    year : 2018,
-    publishedBy : 'Packt Publishing',
-    numberOfPages : 302,
-    language : 'English',
-    author : 'Juha Hinkula',
-    edition : 1,
-    borrowed : false,
-    lastCustomers : ['A78945623', 'T89456578', 'E12035645', 'A15903576', 'T26483791']
-};
-var cBook = {
-    issn : '',
-    title : '',
-    month : 0,
-    year : 0,
-    publishedBy : '',
-    numberOfPages : 0,
-    language : 'English',
-    author : '',
-    edition : 0,
-    borrowed : false,
-    lastCustomers : []
-};
+var book = {
+    issn: '',
+    title: '',
+    month: 1,
+    year: 2019,
+    publishedBy: '',
+    numberOfPages: 1,
+    language: 'English',
+    author: '',
+    edition: 1,
+    borrowed: false,
+    lastCustomers: [],
+    init: function (issn, title, month, year, publishedBy, numberOfPages, language, author, edition, borrowed, lastCustomers){
+        this.issn = issn;
+        this.title = title;
+        this.month = month;
+        this.year = year;
+        this.publishedBy = publishedBy;
+        this.numberOfPages = numberOfPages;
+        this.language = language;
+        this.author = author;
+        this.edition = edition;
+        this.borrowed = borrowed;
+        this.lastCustomers = lastCustomers;
+    },
+    original: function (){
+        this.issn = '1789138086';
+        this.title = 'Full Stack Development with Spring Boot 2.0 and React';
+        this.month = 6;
+        this.year = 2018;
+        this.publishedBy = 'Packt Publishing';
+        this.numberOfPages = 302;
+        this.language = 'English';
+        this.author = 'Juha Hinkula';
+        this.edition = 1;
+        this.borrowed = false;
+        this.lastCustomers = ['A78945623', 'T89456578', 'E12035645', 'A15903576', 'T26483791'];
+    },
+    parse: function (text){
+        var obj = JSON.parse(text);
+        for(ppty in obj){
+            if(typeof(obj[ppty])!=="undefined"){
+                eval('this.' + ppty + ' = obj[ppty];');
+            }
+        }
+    },
+    stringify: function () {
+		var info = "Book Information";
+		info+= "\nISSN-10: " + this.issn;
+		info+= "\nTitle: " + this.title;
+		info+= "\nMonth: " + this.month;
+		info+= "\nYear: " + this.year;
+		info+= "\n Published By: " + this.publishedBy;
+		info+= "\nNumber of Pages: " + this.numberOfPages;
+		info+= "\nLanguage: " + this.language;
+        info+= "\nAuthor: " + this.author;
+        info+= "\nEdition: " + this.edition;
+        info+= "\nBorrowed: " + this.borrowed;
+        info+= "\nLast Customers Id: (" + this.lastCustomers.join(", ") + ")";
+		return info;
+	}
+}
+
+var cBook = Object.create(book);
 
 function gObj(id){
     return document.getElementById(id)
@@ -160,22 +193,19 @@ function fillForm(oBook){
 }
 
 function getForm(){
-    cBook.issn = gObj('issn').value;
-    cBook.title = gObj('title').value;
-    cBook.month = gObj('month').value;
-    cBook.year = gObj('year').value;
-    cBook.publishedBy = gObj('publishedBy').value;
-    cBook.numberOfPages = gObj('numberOfPages').value;
-    cBook.language = ((gObj('English').checked) ? 'English' : ((gObj('Spanish').checked) ? 'Spanish' : ((gObj('German').checked) ? 'German' : ((gObj('Italian').checked) ? 'Italian' : 'French'))));
-    cBook.author = gObj('author').value;
-    cBook.edition = gObj('edition').value;
-    cBook.borrowed = gObj('borrowed').checked;
-    cBook.lastCustomers = gObj('lastCustomers').value.split("\n");
+    cBook.init(
+        gObj('issn').value, gObj('title').value, gObj('month').value, 
+        gObj('year').value, gObj('publishedBy').value, gObj('numberOfPages').value, 
+        ((gObj('English').checked) ? 'English' : ((gObj('Spanish').checked) ? 'Spanish' : ((gObj('German').checked) ? 'German' : ((gObj('Italian').checked) ? 'Italian' : 'French')))),
+        gObj('author').value, gObj('edition').value, gObj('borrowed').checked, 
+        gObj('lastCustomers').value.split("\n")
+    );
 }
 
 function setInfo(vBook, saveIt){
     fillForm(vBook);
     if(saveIt){
+        cBook = vBook;
         localStorage.book = JSON.stringify(vBook);
     }
 }
@@ -186,13 +216,28 @@ function saveInfo(){
 }
 
 function setStoreIt(){
-    setInfo(JSON.parse(localStorage.book),false);
+    var tmp = Object.create(book);
+    tmp.parse(localStorage.book)
+    setInfo(tmp,false);
+}
+
+function setOriginal(){
+    var tmp = Object.create(book);
+    tmp.original();
+    setInfo(tmp, false);
+}
+
+function showString(){
+    var txt = cBook.stringify();
+    alert(txt);
 }
 
 if(typeof(localStorage.book)==="undefined"){
-    setInfo(oBook, true);
+    cBook.original();
+    setInfo(cBook,true);
 } else{
-    setInfo(JSON.parse(localStorage.book),false);
+    cBook.parse(localStorage.book);
+    setInfo(cBook,false);
 }
 
 </script>
