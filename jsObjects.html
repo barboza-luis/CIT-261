@@ -109,7 +109,9 @@
 
 <script>
 
+// Object declaration
 var book = {
+    //Properties
     issn: '',
     title: '',
     month: 1,
@@ -121,7 +123,9 @@ var book = {
     edition: 1,
     borrowed: false,
     lastCustomers: [],
+    //Methods
     init: function (issn, title, month, year, publishedBy, numberOfPages, language, author, edition, borrowed, lastCustomers){
+        //Initialize the values given to the object
         this.issn = issn;
         this.title = title;
         this.month = month;
@@ -135,6 +139,7 @@ var book = {
         this.lastCustomers = lastCustomers;
     },
     original: function (){
+        //Set an example called Original
         this.issn = '1789138086';
         this.title = 'Full Stack Development with Spring Boot 2.0 and React';
         this.month = 6;
@@ -148,6 +153,7 @@ var book = {
         this.lastCustomers = ['A78945623', 'T89456578', 'E12035645', 'A15903576', 'T26483791'];
     },
     parse: function (text){
+        //Receive an object book like text and initialize
         var obj = JSON.parse(text);
         for(ppty in obj){
             if(typeof(obj[ppty])!=="undefined"){
@@ -155,7 +161,12 @@ var book = {
             }
         }
     },
-    stringify: function () {
+    stringify: function (){
+        //Convert the object in JSON text format for this object
+        return JSON.stringify(this);
+    },
+    getText: function () {
+        //Return a the object in readable text
 		var info = "Book Information";
 		info+= "\nISSN-10: " + this.issn;
 		info+= "\nTitle: " + this.title;
@@ -178,6 +189,7 @@ function gObj(id){
     return document.getElementById(id)
 }
 
+//Set the object values in the form fields
 function fillForm(oBook){
     gObj('issn').value = oBook.issn;
     gObj('title').value = oBook.title;
@@ -192,6 +204,7 @@ function fillForm(oBook){
     gObj('lastCustomers').value = oBook.lastCustomers.join("\n");   
 }
 
+//Get the values from the from and initialize the object with them
 function getForm(){
     cBook.init(
         gObj('issn').value, gObj('title').value, gObj('month').value, 
@@ -202,36 +215,42 @@ function getForm(){
     );
 }
 
+//Set the given information
 function setInfo(vBook, saveIt){
     fillForm(vBook);
     if(saveIt){
         cBook = vBook;
-        localStorage.book = JSON.stringify(vBook);
+        localStorage.book = vBook.stringify();
     }
 }
 
+//Save the data in the localStorage
 function saveInfo(){
     getForm();
-    localStorage.book = JSON.stringify(cBook);
+    localStorage.book = vBook.stringify();
 }
 
+//Display the data store in the localStorage
 function setStoreIt(){
     var tmp = Object.create(book);
     tmp.parse(localStorage.book)
     setInfo(tmp,false);
 }
 
+//Set the example record in the form 
 function setOriginal(){
     var tmp = Object.create(book);
     tmp.original();
     setInfo(tmp, false);
 }
 
+//Shows the readable message
 function showString(){
-    var txt = cBook.stringify();
+    var txt = cBook.getText();
     alert(txt);
 }
 
+//Initialize the form
 if(typeof(localStorage.book)==="undefined"){
     cBook.original();
     setInfo(cBook,true);

@@ -114,6 +114,7 @@
 
 <script>
 
+//Object with the example Record called original
 var oBook = {
     issn : '1789138086',
     title : 'Full Stack Development with Spring Boot 2.0 and React',
@@ -127,6 +128,8 @@ var oBook = {
     borrowed : false,
     lastCustomers : ['A78945623', 'T89456578', 'E12035645', 'A15903576', 'T26483791']
 };
+
+//Object with default value
 var cBook = {
     issn : '',
     title : '',
@@ -145,6 +148,7 @@ function gObj(id){
     return document.getElementById(id)
 }
 
+//Set the object values in the form fields
 function fillForm(oBook){
     gObj('issn').value = oBook.issn;
     gObj('title').value = oBook.title;
@@ -159,6 +163,7 @@ function fillForm(oBook){
     gObj('lastCustomers').value = oBook.lastCustomers.join("\n");   
 }
 
+//Get the values from the from and initialize the object with them
 function getForm(){
     cBook.issn = gObj('issn').value;
     cBook.title = gObj('title').value;
@@ -173,6 +178,7 @@ function getForm(){
     cBook.lastCustomers = gObj('lastCustomers').value.split("\n");
 }
 
+//Set the given information
 function setInfo(vBook, saveIt){
     fillForm(vBook);
     if(saveIt){
@@ -180,15 +186,18 @@ function setInfo(vBook, saveIt){
     }
 }
 
+//Save the data in the localStorage
 function saveInfo(){
     getForm();
     localStorage.book = JSON.stringify(cBook);
 }
 
+//Display the data store in the localStorage
 function setStoreIt(){
     setInfo(JSON.parse(localStorage.book),false);
 }
 
+//Initialize the form
 if(typeof(localStorage.book)==="undefined"){
     setInfo(oBook, true);
 } else{
