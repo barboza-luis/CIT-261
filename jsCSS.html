@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="Manipulating CSS Class Properties Using JavaScript.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - Manipulating CSS Class Properties Using JavaScript.</title>
+
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body style="font-size:14px;">
+
+<table style="width: 650px">
+    <tr>
+        <td colspan="5">
+            <h2><a href="index.html">&lt;&lt;</a> Manipulating CSS Class Properties Using JavaScript.</h2>
+            <p>
+                JavaScript is a programming language. JavaScript is widely used to provide 
+                interactivity in web sites and applications. JavaScript can interact with 
+                stylesheets, allowing you to write programs that change a document’s style 
+                dynamically. There are three ways to do this:
+            </p>
+            <ul>
+                <li>By working with the document’s list of stylesheets—for example: adding, removing or modifying a stylesheet.</li>
+                <li>By working with the rules in a stylesheet—for example: adding, removing or modifying a rule.</li>
+                <li>By working with an individual element in the DOM—modifying its style independently of the document’s stylesheets.</li>
+            </ul>
+            <hr>
+        </td>
+    </tr>
+    <tr>
+        <td>I am using h1, input Text, p, textarea, img, and button tags for this example. If you move the mouse over the object you will see a comment about the property modified. I use DOM to modify the style of the elements.</td>
+    </tr>    
+    <tr>
+        <td>
+            <select id="property">
+                <option value="">Select an option</option>
+                <option value="1">Border</option>
+                <option value="2">Width and Height</option>
+                <option value="3">Margin and Padding</option>
+                <option value="4">Display</option>
+                <option value="5">Float</option>
+                <option value="6">Color</option>
+                <option value="7">Background</option>
+                <option value="8">Font</option>
+            </select> / 
+            <button onclick="applyChange();">Apply</button> / 
+            <button onclick="location.reload();">Reset</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="width:650px; height:400px; overflow:scroll;">
+                <h1 id="h1Obj" title="default">Any text could be here H1</h1>
+                <input id="textObj" title="default" type="text" value="Any text could be here input TEXT">
+                <p id="pObj" title="default">Any text could be here or there P. Could be a large paragraph or a small. But this is only a test for css properties</p>
+                <textarea id="textareaObj" title="default">Any text could be here or there TEXTAREA. Could be a large paragraph or a small. But this is only a test for css properties</textarea>
+                <img id="imgObj" title="default" src="image.png">
+                <button id="buttonObj" title="default">Any text could be here BUTTON</button>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+
+var displayFlag = false;
+
+//Just to write less
+function gObj(id){
+    return document.getElementById(id);
+}
+
+//Initialize the property
+function initialDisplay(){
+    displayFlag = false;
+    var tmp = gObj('h1Obj');
+    tmp.style.display = 'initial';
+    tmp = gObj('textObj');
+    tmp.style.display = 'initial';
+    tmp = gObj('pObj');
+    tmp.style.display = 'initial';
+    tmp = gObj('textareaObj');
+    tmp.style.display = 'initial';
+    tmp = gObj('imgObj');
+    tmp.style.display = 'initial';
+}
+
+//To modify Border property using js
+function borderPro(){
+    if(displayFlag){ initialDisplay(); }
+    var tmp = gObj('h1Obj');
+    tmp.title = 'border: 2px solid green';
+    tmp.style.border = '2px solid green';
+    tmp = gObj('textObj');
+    tmp.title = 'border: 2px inset red';
+    tmp.style.border = '2px inset red';
+    tmp = gObj('pObj');
+    tmp.title = 'border: 2px outset blue';
+    tmp.style.border = '2px outset blue';
+    tmp = gObj('textareaObj');
+    tmp.title = 'border: 3px dotted yellow';
+    tmp.style.border = '3px dotted yellow';
+    tmp = gObj('imgObj');
+    tmp.title = 'border: 4px double';
+    tmp.style.border = '4px double';
+    tmp = gObj('buttonObj');
+    tmp.title = 'border: 2px dashed purple';
+    tmp.style.border = '2px dashed purple';
+}
+
+//To modify Width and Height property using js
+function WidthHeightPro(){
+    if(displayFlag){ initialDisplay(); }
+    var tmp = gObj('h1Obj');
+    tmp.title = 'height: 200px';
+    tmp.style.height = '200px';
+    tmp = gObj('textObj');
+    tmp.title = 'width: 25% height: 1em';
+    tmp.style.width = '25%';
+    tmp.style.height = '1em';
+    tmp = gObj('pObj');
+    tmp.title = 'width: 125px';
+    tmp.style.width = '125px';
+    tmp = gObj('textareaObj');
+    tmp.title = 'width: 350.5px';
+    tmp.style.width = '350.5px';
+    tmp = gObj('imgObj');
+    tmp.title = 'height: 65px';
+    tmp.style.height = '65px';
+    tmp = gObj('buttonObj');
+    tmp.title = 'width: 165.3px height: 2rem';
+    tmp.style.width = '165px';
+    tmp.style.height = '2rem';
+}
+
+//To modify Margin and Padding property using js
+function MarginPaddingPro(){
+    if(displayFlag){ initialDisplay(); }
+    var tmp = gObj('h1Obj');
+    tmp.title = 'margin: 5px';
+    tmp.style.margin = '5px';
+    tmp = gObj('textObj');
+    tmp.title = 'margin: 5px  padding: 5px';
+    tmp.style.margin = '5px';
+    tmp.style.padding = '5px';
+    tmp = gObj('pObj');
+    tmp.title = 'margin: 0px 10px';
+    tmp.style.margin = '0px 10px';
+    tmp = gObj('textareaObj');
+    tmp.title = 'padding: 0px 10px';
+    tmp.style.padding = '0px 10px';
+    tmp = gObj('imgObj');
+    tmp.title = 'margin: 0px 10px 5px 2px';
+    tmp.style.margin = '0px 10px 5px 2px';
+    tmp = gObj('buttonObj');
+    tmp.title = 'margin: -10.5px 0px 0px 0px  padding: 1rem';
+    tmp.style.margin = '-10.5px 0px 0px 0px';
+    tmp.style.padding = '1rem';
+}
+
+//To modify Display property using js
+function displayPro(){
+    displayFlag = true;
+    var tmp = gObj('h1Obj');
+    tmp.title = 'display: inline';
+    tmp.style.display = 'inline';
+    tmp = gObj('textObj');
+    tmp.title = 'display: inline-block';
+    tmp.style.display = 'inline-block';
+    tmp = gObj('pObj');
+    tmp.title = 'display: none';
+    tmp.style.display = 'none';
+    tmp = gObj('textareaObj');
+    tmp.title = 'display: table-cell';
+    tmp.style.display = 'table-cell';
+    tmp = gObj('imgObj');
+    tmp.title = 'display: block';
+    tmp.style.display = 'block';
+    tmp = gObj('buttonObj');
+    tmp.title = 'display: initial';
+    tmp.style.display = 'initial';
+}
+
+//To modify Float property using js
+function floatPro(){
+    if(displayFlag){ initialDisplay(); }
+    var tmp = gObj('h1Obj');
+    tmp.title = 'float: initial';
+    tmp.style.float = 'initial';
+    tmp = gObj('textObj');
+    tmp.title = 'float: left';
+    tmp.style.float = 'left';
+    tmp = gObj('pObj');
+    tmp.title = 'float: none';
+    tmp.style.float = 'none';
+    tmp = gObj('textareaObj');
+    tmp.title = 'float: right';
+    tmp.style.float = 'right';
+    tmp = gObj('imgObj');
+    tmp.title = 'float: inline-start';
+    tmp.style.float = 'inline-start';
+    tmp = gObj('buttonObj');
+    tmp.title = 'float: inline-end';
+    tmp.style.float = 'inline-end';
+}
+
+//To modify Color property using js
+function colorPro(){
+    if(displayFlag){ initialDisplay(); }
+    var tmp = gObj('h1Obj');
+    tmp.title = 'color: red';
+    tmp.style.color = 'red';
+    tmp = gObj('textObj');
+    tmp.title = 'color: green';
+    tmp.style.color = 'green';
+    tmp = gObj('pObj');
+    tmp.title = 'color: orange';
+    tmp.style.color = 'orange';
+    tmp = gObj('textareaObj');
+    tmp.title = 'color: purple';
+    tmp.style.color = 'purple';
+    tmp = gObj('imgObj');
+    tmp.title = 'color: gray';
+    tmp.style.color = 'gray';
+    tmp = gObj('buttonObj');
+    tmp.title = 'color: yellow';
+    tmp.style.color = 'yellow';
+}
+
+//To modify Background property using js
+function backgroundPro(){
+    if(displayFlag){ initialDisplay(); }
+    var tmp = gObj('h1Obj');
+    tmp.title = 'background: purple';
+    tmp.style.background = 'purple';
+    tmp = gObj('textObj');
+    tmp.title = 'background: gray';
+    tmp.style.background = 'gray';
+    tmp = gObj('pObj');
+    tmp.title = 'background: white';
+    tmp.style.background = 'white';
+    tmp = gObj('textareaObj');
+    tmp.title = 'background: green';
+    tmp.style.background = 'green';
+    tmp = gObj('imgObj');
+    tmp.title = 'background: yellow';
+    tmp.style.background = 'yellow';
+    tmp = gObj('buttonObj');
+    tmp.title = 'background: blue';
+    tmp.style.background = 'blue';
+}
+
+//To modify Font property using js
+function fontPro(){
+    if(displayFlag){ initialDisplay(); }
+    var tmp = gObj('h1Obj');
+    tmp.title = 'font: medium "Times New Roman", Times, serif';
+    tmp.style.font = 'medium "Times New Roman", Times, serif';
+    tmp = gObj('textObj');
+    tmp.title = 'font: italic small-caps bold x-small  "Times New Roman", Times, serif';
+    tmp.style.font = 'italic small-caps bold x-small  "Times New Roman", Times, serif';
+    tmp = gObj('pObj');
+    tmp.title = 'font: oblique bolder small  "Times New Roman", Times, serif';
+    tmp.style.font = 'oblique bolder small  "Times New Roman", Times, serif';
+    tmp = gObj('textareaObj');
+    tmp.title = 'font: small-caps lighter large Arial, Helvetica, sans-serif';
+    tmp.style.font = 'small-caps lighter large Arial, Helvetica, sans-serif';
+    tmp = gObj('imgObj');
+    tmp.title = 'font not apply';
+    tmp = gObj('buttonObj');
+    tmp.title = 'font: oblique small-caps 600 18px Arial, Helvetica, sans-serif';
+    tmp.style.font = 'oblique small-caps 600 18px Arial, Helvetica, sans-serif';
+}
+
+//According with the option selected it will be applied the change
+function applyChange(){
+    var pro = gObj('property').value;
+    switch(pro){
+        case '1': borderPro(); break;
+        case '2': WidthHeightPro(); break;
+        case '3': MarginPaddingPro(); break;
+        case '4': displayPro(); break;
+        case '5': floatPro(); break;
+        case '6': colorPro(); break;
+        case '7': backgroundPro(); break;
+        case '8': fontPro(); break;
+    }
+}
+
+</script>
+
+</body>
+</html>
