@@ -1,0 +1,64 @@
+<library>
+    <book>
+        <issn>1789138086</issn>
+        <title>Full Stack Development with Spring Boot 2.0 and React</title>
+        <month>6</month>
+        <year>2018</year>
+        <publishedBy>Packt Publishing</publishedBy>
+        <numberOfPages>302</numberOfPages>
+        <language>English</language>
+        <author>Juha Hinkula</author>
+        <edition>1</edition>
+        <borrowed>false</borrowed>
+        <lastCustomers>
+            <customer>
+                <id>A78945623</id>
+            </customer>
+            <customer>
+                <id>T89456578</id>
+            </customer>
+            <customer>
+                <id>E12035645</id>
+            </customer>
+            <customer>
+                <id>A15903576</id>
+            </customer>
+            <customer>
+                <id>T26483791</id>
+            </customer>
+        </lastCustomers>
+    </book>
+    <book>
+        <issn>1259643883</issn>
+        <title>Building Wealth One House at a Time, Updated and Expanded</title>
+        <month>6</month>
+        <year>2016</year>
+        <publishedBy>McGraw-Hill Education</publishedBy>
+        <numberOfPages>256</numberOfPages>
+        <language>English</language>
+        <author>John Schaub</author>
+        <edition>2</edition>
+        <borrowed>false</borrowed>
+        <lastCustomers></lastCustomers>
+    </book>
+    <book>
+        <issn>1602550093</issn>
+        <title>El arte de cerrar la venta</title>
+        <month>10</month>
+        <year>2007</year>
+        <publishedBy>Grupo Nelson</publishedBy>
+        <numberOfPages>240</numberOfPages>
+        <language>Spanish</language>
+        <author>Brian Tracy</author>
+        <edition>1</edition>
+        <borrowed>false</borrowed>
+        <lastCustomers>
+            <customer>
+                <id>T89456578</id>
+            </customer>
+            <customer>
+                <id>A15903576</id>
+            </customer>
+        </lastCustomers>
+    </book>
+</library>
