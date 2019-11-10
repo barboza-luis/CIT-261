@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="Creating CSS3 Transitions and Animations in CSS and triggering them with JavaScript.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - Creating CSS3 Transitions and Animations in CSS and triggering them with JavaScript.</title>
+
+<meta name="theme-color" content="#ffffff">
+
+<style>
+
+button { width: 100px; }
+
+#container { width: 450px; height: 450px; background: lightgrey; }
+
+#colorBox{
+    width: 100px;
+    height: 100px;
+    background: red;
+    -webkit-transition: width 2s, height 4s; /* For Safari 3.1 to 6.0 */
+    transition: width 2s, height 4s, border-radius 2s;
+    position: relative;
+    /* Safari 4.0 - 8.0 */
+    -webkit-animation-name: animaBox; 
+    -webkit-animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate-reverse;
+    -webkit-animation-play-state: paused;
+    animation-name: animaBox;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-play-state: paused;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes animaBox {
+  0%   { background:red; left:0px; top:0px;}
+  25%  { background:yellow; left:200px; top:0px;}
+  50%  { background:blue; left:200px; top:200px;}
+  75%  { background:green; left:0px; top:200px;}
+  100% { background:red; left:0px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes animaBox {
+  0%   { background:red; left:0px; top:0px; }
+  25%  { background:yellow; left:200px; top:0px; }
+  50%  { background:blue; left:200px; top:200px; }
+  75%  { background:green; left:0px; top:200px; }
+  100% { background:red; left:0px; top:0px; }
+}
+
+</style>
+
+</head>
+<body style="font-size:14px;">
+
+<table style="width: 650px">
+    <tr>
+        <td colspan="5">
+            <h2><a href="index.html">&lt;&lt;</a> Creating CSS3 Transitions and Animations in CSS and triggering them with JavaScript.</h2>
+            <p>Transition vs. Animation. The most important difference between CSS transition and CSS animation is how they are triggered. A transition occurs when the element state or property is changed. ... While transitions are easier to use, the animations offer more control over how the states are animated.</p>
+            <hr>
+        </td>
+    </tr>
+    <tr>
+        <td>I am using transition with Bigger/Smaller button, and I use animation with Play/Pause button.</td>
+    </tr>    
+    <tr>
+        <td>
+            <button id="colorButton" onclick="transition();">Bigger</button>
+            <button id="aniButton" onclick="animation();">Play</button>
+            <br><br>
+            <div id="container">
+                <div id="colorBox"></div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+
+var colorBoolean = false;
+var aniBoolean = false;
+
+//Just to write less
+function gObj(id){
+    return document.getElementById(id);
+}
+
+function transition(){
+    var box = gObj('colorBox');
+    var boxSize = ((colorBoolean)? '100px' : '250px');
+    var boxCorner = ((colorBoolean)? '0px' : '10px');
+    colorBoolean = !colorBoolean;
+    box.style.width = boxSize;
+    box.style.height = boxSize;
+    box.style.borderRadius = boxCorner;
+    gObj('colorButton').innerHTML = ((colorBoolean)? 'Smaller' : 'Bigger');
+
+}
+
+function animation(){
+    var box = gObj('colorBox');
+    box.style.webkitAnimationPlayState = ((aniBoolean)? "paused" : "running");
+    gObj('aniButton').innerHTML = ((aniBoolean)? 'play' : 'pause');
+    aniBoolean = !aniBoolean;
+}
+
+</script>
+
+</body>
+</html>
