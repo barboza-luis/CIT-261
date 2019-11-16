@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.</title>
+
+<meta name="theme-color" content="#ffffff">
+
+<style>
+
+#container { width: 650px; height: 450px; background: lightgrey; border: 1px solid darkgrey; }
+
+#box1 {
+    width: 300px;
+    height: 100px;
+    background: yellow;
+    -webkit-transition: background-color 500ms, border 250ms, margin 500ms;
+    transition: background-color 500ms, border 250ms, margin 500ms;
+    position: relative;
+}
+
+#box1:hover {
+    background-color: orange;
+    border: 2px dotted yellow;
+    margin: 10px 0px;
+}
+
+#box2{
+    width: 300px;
+    height: 100px;
+    background: blue;
+    -webkit-transition: width 500ms, height 1000ms;
+    transition: width 500ms ease-in, height 1000ms ease-out;
+    transition-delay: 250ms;
+    position: relative;
+}
+
+#box2:hover {
+    width: 650px;
+    height: 150px;
+}
+
+#box3{
+    width: 300px;
+    height: 100px;
+    background: red;
+    -webkit-transition: background-color 500ms, border-radius 750ms, margin .5s;
+    transition: background-color 500ms, border-radius 750ms ease, margin .5s;
+    position: relative;
+}
+
+#box3:hover {
+    border-radius: 50px;
+    background-color: green;
+    margin: 10px;
+}
+
+#box4{
+    width: 300px;
+    height: 100px;
+    background: white;
+    -webkit-transition: background-color 500ms, box-shadow 600ms, margin 500ms;
+    transition: background-color 500ms, box-shadow 600ms ease-in-out, margin 500ms;
+    position: relative;
+}
+
+#box4:hover {
+    box-shadow: 10px 10px 5px black;
+    background-color: purple;
+    margin: 10px;
+}
+
+</style>
+
+</head>
+<body style="font-size:14px;">
+
+<table style="width: 650px">
+    <tr>
+        <td colspan="5">
+            <h2><a href="index.html">&lt;&lt;</a> Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.</h2>
+            <p>CSS transitions allows you to change property values smoothly, over a given duration.</p>
+            <hr>
+        </td>
+    </tr>  
+    <tr>
+        <td>In this example I change some property and use diferent durations, I use only CSS to these transitions.<br>&nbsp;</td>
+    </tr>  
+    <tr>
+        <td>
+            <div id="container">
+                <div id="box1"></div>
+                <div id="box2"></div>
+                <div id="box3"></div>
+                <div id="box4"></div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
