@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.</title>
+
+<meta name="theme-color" content="#ffffff">
+
+<style>
+
+#container {
+    width: 650px;
+    height: 450px;
+    background: lightgrey;
+    border: 1px solid darkgrey;
+    position: relative;
+    overflow: hidden;
+}
+
+#box1 {
+    height: 100px;
+    width: 100px;
+    top: 63px;
+    left: 113px;
+    position: absolute;
+    border: 1px solid darkgrey;
+    font: 14px arial;
+    text-align: center;
+    background-color: blue;
+    border-radius: 100%;
+    animation-name: stretch;
+    animation-duration: 1.5s; 
+    animation-timing-function: ease-out; 
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+    animation-play-state: running;
+}
+
+@keyframes stretch {
+  0% { transform: scale(.5); background-color: darkblue; }
+  50% { background-color: blue; }
+  100% { transform: scale(1.5); background-color: lightblue; }
+}
+
+#box2 {
+    height: 100px;
+    width: 100px;
+    top: 63px;
+    left: 390px;
+    position: absolute;
+    border: 1px solid darkgrey;
+    font: 14px arial;
+    text-align: center;
+    background-color: red;
+    animation: 
+        pulse 3s ease infinite alternate, 
+        nudge 5s linear infinite alternate;
+    border-radius: 100%;
+}
+
+@keyframes pulse {
+    0%, 100% { background-color: yellow; }
+    50% { background-color: orange; }
+}
+
+@keyframes nudge {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(150px, 0); }
+    80% { transform: translate(-150px, 0); }
+}
+
+#box3 {
+    background-color: red;
+    background-image: linear-gradient(to right,
+        rgba(211, 211, 211, 1) 0%,
+        rgba(211, 211, 211, 0) 50%,
+        rgba(211, 211, 211, 1) 100%);
+    color: white;
+    height: 100px;
+    width: 100px;
+    top: 288px;
+    left: 113px;
+    position: absolute;
+    font: 14px arial;
+    text-align: center;
+    animation: 4s linear 0s infinite alternate moveBox;
+}
+
+@keyframes moveBox { from { margin-left: -300px; } to { margin-left: 150px; }  }
+
+#box4{
+    height: 100px;
+    width: 100px;
+    top: 288px;
+    left: 438px;
+    position: absolute;
+    font: 14px arial;
+    text-align: center;
+    animation: rubberBand 1s infinite;
+    border: 1px solid darkgrey;
+    background-color: white;
+}
+
+@keyframes rubberBand {
+    from { transform: scale3d(1, 1, 1); }
+    30% { transform: scale3d(1.25, 0.75, 1); }
+    40% { transform: scale3d(0.75, 1.25, 1); }
+    50% { transform: scale3d(1.15, 0.85, 1); }
+    65% { transform: scale3d(0.95, 1.05, 1); }
+    75% { transform: scale3d(1.05, 0.95, 1); }
+    to { transform: scale3d(1, 1, 1); }
+}
+
+</style>
+
+</head>
+<body style="font-size:14px;">
+
+<table style="width: 650px">
+    <tr>
+        <td colspan="5">
+            <h2><a href="index.html">&lt;&lt;</a> Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.</h2>
+            <p>CSS transitions allows you to change property values smoothly, over a given duration.</p>
+            <hr>
+        </td>
+    </tr>  
+    <tr>
+        <td>In this example, There are 4 different animations. 1_ bounced ball effect. 2 Translation in 2 different times. 3_ It &#39;s like a surveillance car that looks out and then leaves. 4_ Rubber band effect.<br>&nbsp;</td>
+    </tr>  
+    <tr>
+        <td>
+            <div id="container">
+                <div id="box1"><br><br>Animation 1</div>
+                <div id="box2"><br><br>Animation 2</div>
+                <div id="box3"><br><br>Animation 3</div>
+                <div id="box4"><br><br>Animation 4</div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

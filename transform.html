@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.</title>
+
+<meta name="theme-color" content="#ffffff">
+
+<style>
+
+#container {
+    width: 650px;
+    height: 450px;
+    background: lightgrey;
+    border: 1px solid darkgrey;
+    position: relative;
+}
+
+#box1, #box2, #box3, #box4 {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    border: 1px solid darkgrey;
+    font: 14px arial;
+    text-align: center;
+}
+
+#box1 {
+    background: yellow;
+    top: 120px;
+    left: 220px;
+}
+
+#box1:hover { transform:rotate(-60deg); }
+
+#box2{
+    background: blue;
+    top: 120px;
+    left: 330px;
+}
+
+#box2:hover { transform: skew(20deg,10deg); }
+
+#box3{
+    background: red;
+    top: 230px;
+    left: 220px;
+}
+
+#box3:hover { transform: translate(-20px,20px); }
+
+#box4{
+    background: white;
+    top: 230px;
+    left: 330px;
+}
+
+#box4:hover { transform: scale(1.5, 1.5); }
+
+</style>
+
+</head>
+<body style="font-size:14px;">
+
+<table style="width: 650px">
+    <tr>
+        <td colspan="5">
+            <h2><a href="index.html">&lt;&lt;</a> Designing, Defining, and Triggering CSS3 Transitions without Custom Libraries.</h2>
+            <p>CSS transitions allows you to change property values smoothly, over a given duration.</p>
+            <hr>
+        </td>
+    </tr>  
+    <tr>
+        <td>In this example I change some property and use diferent durations, I use only CSS to these transitions.<br>&nbsp;</td>
+    </tr>  
+    <tr>
+        <td>
+            <div id="container">
+                <div id="box1"><br><br>Rotate</div>
+                <div id="box2"><br><br>Screw</div>
+                <div id="box3"><br><br>Translate</div>
+                <div id="box4"><br><br>Scale</div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
