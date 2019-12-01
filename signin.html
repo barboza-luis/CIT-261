@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="CIT 261 - Barboza Luis - Code Topics">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">        
+<meta name="theme-color" content="#ffffff">
+
+<title>CIT 261 - Barboza Luis - Code Topics</title>
+
+<style>
+
+body{ font-family:Arial, Helvetica, sans-serif; }
+
+.button {
+    padding: 10px;
+    border: 2px solid darkblue;
+    background: blue;
+    color: lightblue;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: box-shadow 0.5s;
+    cursor: pointer;
+    margin: 0 10px;
+}
+.button:hover { color: white; box-shadow: 2px 2px 15px lightslategray; }
+
+</style>
+
+</head>
+
+<body>
+<form method="post" action="/acme/accounts/">
+    <fieldset>
+        <legend>Please fill out all fields and then click Login</legend>
+        <label>Email Address
+            <input type="email" name="clientEmail" id="clientEmail" placeholder="someone@gmail.com" <?php if (isset($clientEmail)) {echo "value='$clientEmail'";} ?> required>
+        </label>
+        <label>Password (must be at least 8 characters including<br>at least 1 number, 1 capital letter and 1 special character)
+            <input type="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="clientPassword" id="clientPassword" required>
+        </label>
+        <br>
+        <input type="submit" value="Login" class="submitBtn">
+        <input type="hidden" name="action" value="login-user">
+    </fieldset>
+</form>
+<p>
+    Not a member? <a href="/acme/index.php?action=register" class="registerBtn">Create an Account</a>
+</p>
+
+</body>
+</html>
