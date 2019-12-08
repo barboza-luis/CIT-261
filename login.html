@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="CIT 261 - Login">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">        
+<meta name="theme-color" content="#ffffff">
+
+<title>CIT 261 - Login</title>
+
+<style>
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body>
+
+<div style="text-align: center;">
+<h1>Login</h1>
+<form method="get" action="verify.html" style="text-align: left;">
+    <fieldset>
+        <legend>Please fill out all fields and then click Login</legend>
+        <br>
+        <input type="hidden" name="data" value="f78dfg4hd65fg4h65df4g6h5d4f6g4h6d5fg4h465sdfg64sd6sdfgagnfgjmgj78965456f98g456yh5mymi645r64tgh465awdf45f78d465sdfg64sdf98g456sdfgagnfgjmgj78965456">
+        <div id="message"></div>
+        <label>Email Address<br>
+            <input type="email" name="clientEmail" id="clientEmail" placeholder="someone@gmail.com" class="textBox" required>
+        </label>
+        <br><br>
+        <label>Password <br><span style="font-size: x-small;">(must be at least 8 characters including at least 1 number,<br>1 capital letter and 1 special character)</span><br>
+            <input type="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="clientPassword" id="clientPassword" class="textBox" required>
+        </label>
+        <br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="index.html" class="button">Cancel</a>
+        <input type="submit" value="Login" class="button">
+        <input type="hidden" name="action" value="login">
+    </fieldset>
+</form>
+<br><br><br>
+&nbsp;Not member? <a href="register.html" class="button">Register</a>
+</div>
+
+<script src="scripts.js"></script>
+
+<script>
+
+var access = getQueryVariable('access');
+
+if(access=='wrong'){
+    gObj('message').innerHTML = '<small><span class="errorMessageTitle">There was a problem</span><br><span class="errorMessageContent">Your email or password is incorrect</span></small><br>&nbsp;'
+}
+
+</script>
+
+</body>
+</html>

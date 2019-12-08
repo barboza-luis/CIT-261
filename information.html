@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="Information">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+        
+<title>CIT 261 - Information</title>
+        
+<meta name="theme-color" content="#ffffff">
+
+<style>
+
+#divHTML table { padding: 0; border: 1px solid black; border-spacing: 0px; }
+#divHTML table thead { background: darkblue; }
+#divHTML table thead { color: white; font-weight: bolder; text-align: center; }
+#divHTML table td { margin: 0px; padding: 3px; border: 1px solid black; }
+#divHTML table tfoot { background: lightskyblue; }
+#divHTML table tfoot { color: black; font-weight: bolder; text-align: right; }
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+<body style="font-size:14px;">
+
+<table style="width: 650px">
+<tr>
+    <td>
+        <div id="fullName"></div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <div id="divHTML"></div>
+    </td>
+</tr>
+</table>
+
+<script src="scripts.js"></script>
+
+<script>
+
+function gTag(obj,prt){
+    return obj.getElementsByTagName(prt)[0].childNodes[0].nodeValue;
+}
+
+function constLib(jsonStr){
+    var oJSON = JSON.parse(jsonStr);
+    var tab = '<table><thead><tr><td title="ISSN code 10 Digits">ISSN</td><td>Title</td>';
+    tab+= '<td title="Month / Year was published">M/Y</td><td>Published&nbsp;By</td>';
+    tab+= '<td title="Number of pages">Pag</td><td>Lang</td><td>Author</td>';
+    tab+= '<td title="Edition">E</td><td title="It is borrowed">B</td>';
+    tab+= '<td title="IDs of customers who have borrowed this book">Last Customers</td></tr></thead>';
+    for(var i=0; i<oJSON.library.book.length; i++){
+        tab+= '<tr><td>' + oJSON.library.book[i].issn + '</td>';
+        tab+= '<td>' + oJSON.library.book[i].title + '</td>';
+        tab+= '<td>' + oJSON.library.book[i].month + '/' + oJSON.library.book[i].year + '</td>';
+        tab+= '<td>' + oJSON.library.book[i].publishedBy + '</td>';
+        tab+= '<td>' + oJSON.library.book[i].numberOfPages + '</td>';
+        tab+= '<td>' + oJSON.library.book[i].language + '</td>';
+        tab+= '<td>' + oJSON.library.book[i].author + '</td>';
+        tab+= '<td>' + oJSON.library.book[i].edition + '</td>';
+        tab+= '<td>' + oJSON.library.book[i].borrowed + '</td>';
+        tab+= '<td>';
+        if(typeof(oJSON.library.book[i].lastCustomers)==="undefined"){
+            tab+= '&nbsp;';
+        } else {
+            for(var j=0; j<oJSON.library.book[i].lastCustomers.customer.length; j++){
+                tab+= ((j==0)? '' : ', ') + oJSON.library.book[i].lastCustomers.customer[j].id;
+            }
+        }
+    }
+    tab+= '</td></tr><tfoot><tr><td colspan="10">' + i + ' Book' + ((i<=1)? '' : 's') + ' </td></tr></tfoot></table>';
+    gObj('divHTML').innerHTML = tab;
+}
+
+gObj('fullName').innerHTML = 'Welcome <b>' + localStorage.clientFirstname + ' ' + localStorage.clientLastname + '</b><br>&nbsp;';
+readAJAX('library.json', 'constLib');
+
+</script>
+
+</body>
+</html>

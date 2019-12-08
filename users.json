@@ -1,0 +1,22 @@
+{
+    "users" : [
+        {
+            "clientFirstname" : "Peter",
+            "clientLastname" : "Madsen",
+            "clientEmail" : "madp5@hotmail.com",
+            "clientPassword" : "Pete.234"
+        },
+        {
+            "clientFirstname" : "Julia",
+            "clientLastname" : "Rassmusen",
+            "clientEmail" : "rassmusen2000@outlook.com",
+            "clientPassword" : "Ju.li234"
+        },
+        {
+            "clientFirstname" : "Jose",
+            "clientLastname" : "Perez",
+            "clientEmail" : "jose.perez@gmail.com",
+            "clientPassword" : "josePe.1"
+        }
+    ]
+}

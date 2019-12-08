@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="description" content="CIT 261 - Register">
+<meta name="author" content="Luis Barboza">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">        
+<meta name="theme-color" content="#ffffff">
+
+<title>CIT 261 - Verify</title>
+
+<style>
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body>
+
+<div id="data"></div>
+
+<script src="scripts.js"></script>
+<script>
+
+function valUser(jsonStr){
+    var oJSON = JSON.parse(jsonStr);
+    var found = false;
+    for(var i=0; i<oJSON.users.length; i++){
+        if((oJSON.users[i].clientEmail==clientEmail) && (oJSON.users[i].clientPassword==clientPassword)){
+            found = true;
+            localStorage.clientFirstname = oJSON.users[i].clientFirstname;
+            localStorage.clientLastname = oJSON.users[i].clientLastname;
+            localStorage.clientEmail = clientEmail;
+            window.location.replace("information.html");
+        }
+    }
+    if(!found){
+        window.location.replace("login.html?access=wrong");
+    }
+}
+
+function valNewUser(jsonStr){
+    var oJSON = JSON.parse(jsonStr);
+    var found = false;
+    for(var i=0; i<oJSON.users.length; i++){
+        if(oJSON.users[i].clientEmail==clientEmail){
+            found = true;
+        }
+    }
+    if(found){
+        var str1 = "register.html?info=";
+        var str2 = queryStr();
+        window.location.replace(str1 + "found" + str2);
+    } else {
+        var str = 'Save in the database:<br><br>clientFirstname : ' + clientFirstname + '<br>';
+        str+= 'clientLastname : ' + clientLastname + '<br>clientEmail : ' + clientEmail + '<br>';
+        str+= 'clientPassword : ' + clientPassword + '<br><br><a href="index.html">Start</a>';
+        gObj('data').innerHTML = str;
+    }
+}
+
+function queryStr(){
+    return "&clientFirstname=" + clientFirstname + "&clientLastname=" + clientLastname + "&clientEmail=" + clientEmail.replace("@", "%40");
+}
+
+var action = getQueryVariable('action');
+var clientFirstname = getQueryVariable('clientFirstname');
+var clientLastname = getQueryVariable('clientLastname');
+var clientEmail = getQueryVariable('clientEmail');
+var clientPassword = getQueryVariable('clientPassword');
+
+switch(action){
+    case 'login':
+        if(valEmail(clientEmail) && valPassword(clientPassword)){
+            readAJAX('users.json', 'valUser');
+        } else {
+            window.location.replace("login.html?access=wrong");
+        }
+        break;
+    case 'register':
+        var str1 = "register.html?info=";
+        var str2 = queryStr();
+        var key = ((valName(clientFirstname))? ((valName(clientLastname))? ((valEmail(clientEmail))? ((valPassword(clientPassword))? "" : 'clientPassword') : 'clientEmail') : 'clientLastname') : 'clientFirstname')
+        if(key==""){
+            readAJAX('users.json', 'valNewUser');
+        } else {
+            window.location.replace(str1 + key + str2);
+        }
+        break;
+}
+
+</script>
+
+</body>
+</html>

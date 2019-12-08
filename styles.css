@@ -1,0 +1,40 @@
+body{ font-size: 16px; font-family:Arial, Helvetica, sans-serif; }
+
+form { display: inline-block; }
+
+fieldset { border: 2px solid lightgray; border-radius: 10px; }
+
+legend { font-size: small; }
+
+.button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 2px solid darkslateblue;
+    background: darkblue;
+    color: lightblue;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: box-shadow 0.5s;
+    cursor: pointer;
+    margin: 0 10px;
+    text-decoration: none;
+}
+.button:hover { color: white; box-shadow: 2px 2px 15px lightslategray; }
+
+.textBox {
+    font-size: 16px;
+    padding: 10px;
+    border: 2px solid lightgray;
+    background: white;
+    color: black;
+    border-radius: 5px;
+    width: 260px;
+}
+
+.errorMessageTitle {
+    color: darkred;
+}
+.errorMessageContent {
+    color: red;
+    font-weight: bold;    
+}
